@@ -45,10 +45,7 @@ def test_check_list_of_my_pets():
 def test_create_pet():
     """This test creates a pet."""
     status = pet.post_pet()
-#    pets_list = Pets().get_list_of_pets()[1]  # pet_id беру из метода GET, чтоб тест не создал второго питомца
-#    pet_id = pets_list[0]['id']  # правильно ли это? Или надо брать именно из метода POST?
     assert status == 200
-#    assert pet_id
 
 
 @pytest.mark.authorized
@@ -68,9 +65,7 @@ def test_get_list_of_pets():
 def test_add_pet_photo():
     """This test adds a photo to the pet's account."""
     status = pet.post_pet_photo()
-    #    link = pet.post_pet_photo()[0]
     assert status == 200
-    #    assert link
 
 
 @pytest.mark.authorized
@@ -97,9 +92,7 @@ def test_add_pet_comment():
 def test_update_pet_account():
     """This test updates the information in the pet's account."""
     status = pet.patch_pet_update()
-    #    id_updated_pet = pet.patch_pet_update()[1] # два раза обновит здесь запись, потому что два раза вызывается
     assert status == 200
-    #    assert id_updated_pet
 
 
 @pytest.mark.authorized
