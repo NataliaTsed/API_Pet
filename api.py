@@ -16,7 +16,6 @@ class Pets:
         my_token = res.json()['token']
         my_id = res.json()['id']
         status = res.status_code
-        print(res.json())
         return my_token, status, my_id
 
     def get_list_of_users(self) -> json:
@@ -27,7 +26,6 @@ class Pets:
         res = requests.get(self.base_url + 'users', headers=headers)
         status = res.status_code
         my_id = res.text
-        print(f'My id: {res.json()}')
         return status, my_id
 
     def post_pet(self) -> json:
@@ -39,7 +37,6 @@ class Pets:
                 "gender": MyPets.GENDER_CAT}
         res = requests.post(self.base_url + 'pet', data=json.dumps(data), headers=headers)
         status = res.status_code
-        print(f'My pet {res.json()}')
         return status
 
     def get_list_of_pets(self) -> json:
@@ -52,8 +49,6 @@ class Pets:
         status = res.status_code
         pets_list = res.json()['list']
         pets_quantity = res.json()['total']
-        #       print(pets_list[0]['id'])
-        #       print(pets_quantity)
         return status, pets_list, pets_quantity
 
     def post_pet_photo(self) -> json:
@@ -66,9 +61,7 @@ class Pets:
         files = {'pic': ('nothing.jpg', open('photo\\kitty.jpg', 'rb'), 'image/jpg')}
         res = requests.post(self.base_url + f'pet/{pet_id}/image', headers=headers, files=files)
         status = res.status_code
-        #       link = res.json()['link']
-        print(res.json())
-        return status  # link
+        return status 
 
     def put_pet_like(self) -> json:
         """""The method PUT/pet/{pet_id}/like to the site Swagger is designed to put a like
@@ -80,7 +73,6 @@ class Pets:
         res = requests.put(self.base_url + f'pet/{pet_id}/like', headers=headers)
         status = res.status_code
         response = res.next
-        print(res.json())
         return status, response
 
     def put_pet_comment(self) -> json:
@@ -93,7 +85,6 @@ class Pets:
         data = {"message": MyPets.MESSAGE}
         res = requests.put(self.base_url + f'pet/{pet_id}/comment', data=json.dumps(data), headers=headers)
         status = res.status_code
-        print(res.json())
         return status
 
     def patch_pet_update(self) -> json:
@@ -107,8 +98,6 @@ class Pets:
                 'age': MyPets.AGE_HAMSTER, 'owner_id': my_id}
         res = requests.patch(self.base_url + 'pet', data=json.dumps(data), headers=headers)
         status = res.status_code
-        #       id_updated_pet = res.json()['id']
-        print(res.json())
         return status
 
     def change_pet_photo(self) -> json:
@@ -121,9 +110,7 @@ class Pets:
         files = {'pic': ('nothing.jpg', open('photo\\hamster.jpg', 'rb'), 'image/jpg')}
         res = requests.post(self.base_url + f'pet/{pet_id}/image', headers=headers, files=files)
         status = res.status_code
-        #       link = res.json()['link']
-        print(res.json())
-        return status  # link
+        return status 
 
     def get_pet_id(self) -> json:
         """""The method GET/pet/{pet_id} to the site Swagger is designed to get the information
@@ -136,7 +123,6 @@ class Pets:
         status = res.status_code
         inf_pets = res.json()['pet']
         inf_comments = res.json()['comments']
-        print(res.json())
         return status, inf_pets, inf_comments
 
     def delete_pet_account(self) -> json:
@@ -148,7 +134,6 @@ class Pets:
         pet_id = pets_list[0]['id']
         res = requests.delete(self.base_url + f'pet/{pet_id}', headers=headers)
         status = res.status_code
-        print(res.json())
         return status
 
     def change_not_my_pet(self) -> json:
@@ -198,15 +183,3 @@ class Pets:
         res = requests.put(self.base_url + f'pet/{pet_id}/like', headers=headers)
         status = res.status_code
         return status
-
-
-# Pets().get_token()
-# Pets().get_list_of_users()
-# Pets().post_pet()
-# Pets().get_list_of_pets()
-# Pets().post_pet_photo()
-# Pets().put_pet_like()
-# Pets().put_pet_comment()
-# Pets().patch_pet_update()
-# Pets().change_pet_photo()
-# Pets().delete_pet_account()
